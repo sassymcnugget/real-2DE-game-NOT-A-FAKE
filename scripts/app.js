@@ -69,13 +69,30 @@ function playerInput(e)
 		}
 }
 
+
+let screens = document.getElementsByClassName("screen");
+
 //Game scene change activation
 
 function screenChange(screenName)
 {
-
+    for(let i = 0; i < screens.length; i++)
+    {
+        if(screens[i].id == screenName)
+        {
+            screens[i].classList.remove("hidden");
+        } 
+        else
+        {
+            screens[i].classList.add("hidden");
+        }
+    }
 }
 
+function startGame()
+{
+    screenChange("grid-screen");
+    createGrid();
+    move(0,0);
+}
 
-createGrid();
-move(0,0);
