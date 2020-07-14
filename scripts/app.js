@@ -54,16 +54,20 @@ function playerInput(e)
     //https://www.includehelp.com/code-snippets/move-object-with-arrow-keys-using-javascript-function.aspx
     let key_code=e.which||e.keyCode;
 		switch(key_code){
-			case 37: //left arrow key
+            case 37: //left arrow key
+            case 65: //a key
 				move(gameState.playerPositionX - 1, gameState.playerPositionY);
 				break;
-			case 38: //Up arrow key
+            case 38: //Up arrow key
+            case 87: //w key
 				move(gameState.playerPositionX, gameState.playerPositionY - 1);
 				break;
-			case 39: //right arrow key
+            case 39: //right arrow key
+            case 68: //d key
 				move(gameState.playerPositionX + 1, gameState.playerPositionY);
 				break;
-			case 40: //down arrow key
+            case 40: //down arrow key
+            case 83: //s key
 				move(gameState.playerPositionX, gameState.playerPositionY + 1);
 				break;						
 		}
