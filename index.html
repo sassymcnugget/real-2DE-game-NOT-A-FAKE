@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body onkeydown='playerInput(event)'>
+
+  <div id="start-screen" class="screen">
+    START SCREEN
+    <button id="play" onclick="startGame(event)">pls play me bro</button>
+    <!-- do if I have time -->
+    <!-- <button id="about">gööd info</button> -->
+  </div>
+
+  <!-- took this from W3 schools on how to make a grid -->
+  <div id="grid-screen" class="grid-container screen hidden">
+    <div class="grid-item">0,0</div>
+    <div class="grid-item">0,1</div>
+    <div class="grid-item">0,2</div>  
+    <div class="grid-item">0,3</div>
+    <div class="grid-item">0,4</div>
+    <div class="grid-item">1,0</div>  
+    <div class="grid-item">1,1</div>
+    <div class="grid-item">1,2</div>
+    <div class="grid-item">1,3</div> 
+    <div class="grid-item">1,4</div>
+    <div class="grid-item">2,0</div>
+    <div class="grid-item">2,1</div>
+    <div class="grid-item">2,2</div> 
+    <div class="grid-item">2,3</div> 
+    <div class="grid-item">2,4</div>
+    <div class="grid-item">3,0</div>
+    <div class="grid-item">3,1</div>
+    <div class="grid-item">3,2</div> 
+    <div class="grid-item">3,3</div> 
+    <div class="grid-item">3,4</div>  
+    <div class="grid-item">4,0</div>
+    <div class="grid-item">4,1</div>
+    <div class="grid-item">4,2</div> 
+    <div class="grid-item">4,3</div> 
+    <div class="grid-item">4,4</div>    
+  </div>
+
+  <div id="battle-screen" class="screen hidden">
+    BATTLE SCREEN
+  </div>
+
+  <div id="end-screen" class="screen hidden">
+    END SCREEN
+  </div>
+
+  <div id="death-screen" class="screen hidden">
+    DEATH SCREEN
+  </div>
+
+
+<script src="scripts/app.js"></script>
+</body>
+</html>
