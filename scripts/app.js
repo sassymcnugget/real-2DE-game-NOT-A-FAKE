@@ -10,7 +10,12 @@ hero.setAttribute("class", "grid-img");
 let gameState = 
 {
     playerPositionX: 0,
-    playerPositionY: 0
+    playerPositionY: 0,
+    winPosition:
+    {
+        x: 4,
+        y: 4
+    }
 }
 
 //Collect all grid items as an array
@@ -46,6 +51,7 @@ function move (x, y)
     gridSystem[y][x].append(hero);
     gameState.playerPositionX = x;
     gameState.playerPositionY = y;
+    winCheck();
 }
 
 function playerInput(e)
@@ -100,3 +106,21 @@ function startGame()
     move(0,0);
 }
 
+function battleCheck()
+{
+
+}
+
+function winCheck()
+{
+    if(gameState.playerPositionX == gameState.winPosition.x &&
+        gameState.playerPositionY == gameState.winPosition.y)
+    {
+        winState();
+    }
+}
+
+function winState()
+{
+    screenChange("end-screen");
+}

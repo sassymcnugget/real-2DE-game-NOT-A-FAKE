@@ -10,8 +10,13 @@
   <div id="start-screen" class="screen">
     START SCREEN
     <button id="play" onclick="startGame()">pls play me bro</button>
-    <!-- do if I have time -->
-    <!-- <button id="about">gööd info</button> -->
+    do if I have time
+    <button id="about" onclick="screenChange('info-screen')">gööd info</button>
+  </div>
+
+  <div id="info-screen" class="screen hidden">
+    INFO SCREEN
+    <button id="start-button" onclick="screenChange('start-screen')">go bacc</button>
   </div>
 
   <!-- took this from W3 schools on how to make a grid -->

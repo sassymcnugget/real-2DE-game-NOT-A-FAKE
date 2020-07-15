@@ -52,7 +52,7 @@ body
 
 #start-screen
 {
-  background-color: antiquewhite;
+  background-color: rgb(250, 225, 192);
 }
 
 #grid-screen
@@ -67,5 +67,5 @@ body
 
 #end-screen
 {
-
+  background-color: rgb(250, 225, 192);
 }
