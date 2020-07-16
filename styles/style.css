@@ -33,13 +33,36 @@ body
 
 .grid-img 
 {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
 }
 
 .hidden
 {
   display: none;
+}
+
+/* Stolen from https://www.w3schools.com/howto/howto_css_modals.asp */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content 
+{
+  margin: 15% 14%; 
+  padding: 20px;
+  border: 1px solid #888;
 }
 
 
@@ -60,6 +83,19 @@ body
 
 }
 
+#battle-screen
+{
+  z-index: 2;
+  background-color: #00000040;
+}
+
+#battle-image
+{
+  margin-left: auto;
+  display: block;
+  
+}
+
 #death-screen
 {
 
@@ -68,4 +104,15 @@ body
 #end-screen
 {
   background-color: rgb(250, 225, 192);
+}
+
+#message-box {
+  position:fixed;
+  bottom:0px;
+  background-color: azure;
+  padding: 10px;
+  width: 1020px;
+  margin: 0% 14%;
+  height: 40%;
+  z-index: 3;
 }

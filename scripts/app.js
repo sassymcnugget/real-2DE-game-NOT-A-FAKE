@@ -2,7 +2,7 @@ console.log("pls bro");
 
 //player character attributes
 let hero = document.createElement("img");
-hero.setAttribute("src", "./images/ness bike.gif");
+hero.setAttribute("src", "./images/mc walk.gif");
 hero.setAttribute("id", "heroß");
 hero.setAttribute("class", "grid-img");
 //document.querySelector(".grid-item").append(hero);

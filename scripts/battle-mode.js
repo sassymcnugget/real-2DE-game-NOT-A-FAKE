@@ -1,6 +1,6 @@
 console.log("pls battle me bro");
 
-
+let battleScreen = document.querySelector("#battle-screen");
 
 const player = 
 {
@@ -22,6 +22,8 @@ let enemies =
         name: "Shrek",
         type: "Ogre",
         battleStyle: "appears from the mud",
+        battleImage: "./images/placeholder500.jpeg",
+        overworldImage: "./images/placeholder.gif",
         hp: 15,
         attack: () =>
         {
@@ -48,6 +50,8 @@ let enemies =
         name: "Nina",
         type: "Chimera",
         battleStyle: "wanders up to you",
+        battleImage: "./images/nina doing a THING.gif",
+        overworldImage: "./images/placeholder.gif",
         hp: 5,
         attack: () =>
         {
@@ -70,6 +74,8 @@ let enemies =
         name: "Cosmo Kramer",
         type: "Neighbor",
         battleStyle: "& cohort approach",
+        battleImage: "./images/nina doing a THING.gif",
+        overworldImage: "./images/placeholder.gif",
         hp: 12,
         attack: () =>
         {
@@ -97,6 +103,8 @@ let enemies =
         name: "Joshua",
         type: "devil",
         battleStyle: "laughs his way into battle",
+        battleImage: "./images/nina doing a THING.gif",
+        overworldImage: "./images/placeholder.gif",
         hp: 30,
         attack: () =>
         {
@@ -122,6 +130,8 @@ let enemies =
         name: "Johnothan Tronothan",
         type: "local funny man",
         battleStyle: "comes over to talk to you about boats",
+        battleImage: "./images/nina doing a THING.gif",
+        overworldImage: "./images/placeholder.gif",
         hp: 18,
         attack: () =>
         {
@@ -162,6 +172,8 @@ function calculateEncounterSum()
 //doing the math in the function so that it's easier to pull from later if I add more enemies later
 function startBattle()
 {
+    battleScreen.classList.remove("hidden");
+    battleScreen.style.display = "block";
     console.log("this battle has started!");
     let currentEnemy = encounterFunction();
     console.log(currentEnemy);
