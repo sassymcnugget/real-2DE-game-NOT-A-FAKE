@@ -5,35 +5,15 @@ console.log("pls battle me bro");
 const player = 
 {
     name: "heroic lad",
-    attack: () => 
-    {
-        return 3;
-    },
-    // defense: 2,
+    attack: 3,
+    defense: 2,
     //add crit percentage later
     // crit: Math.random(2, 5) + strength,
     hp: 15,
-    magAttack: () =>
-    {
-        return 3;
-    }
+    magAttack: 3,
+    magDefense: 3
 }
 
-// const ogre =
-// {
-//     name: "shreksy",
-//     attack: () =>
-//     {
-//         return Math.floor(Math.random() * (5 - 1) + 1);
-//     },
-//     hp: 15
-//         // defRange: Math.random(0-2),
-//     //add percentage for crit rate so it doesn't always hit
-//     // crit: 3 + hitRange = 
-//     // {
-//     //     console.log("ogres have LAYERS. ONIONS HAVE LAYERS. OGRES ARE LIKE ONIONS");
-//     // }
-// }
 
 //adding array of enemies to pull from
 let enemies = 
@@ -166,7 +146,14 @@ let enemies =
     }
 
 ]
-console.log(enemies);
+// console.log(enemies);
+
+function startBattle()
+{
+    console.log("this battle has started!")
+}
+
+//battle chance
 
 
 // const gameInfo = 

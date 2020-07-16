@@ -52,6 +52,7 @@ function move (x, y)
     gameState.playerPositionX = x;
     gameState.playerPositionY = y;
     winCheck();
+    battleCheck();
 }
 
 function playerInput(e)
@@ -108,7 +109,11 @@ function startGame()
 
 function battleCheck()
 {
-
+    let battleRoll = Math.round(Math.random() * 8);
+    if (battleRoll <= 2)
+    {
+        startBattle();
+    }
 }
 
 function winCheck()
