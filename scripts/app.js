@@ -124,3 +124,6 @@ function winState()
 {
     screenChange("end-screen");
 }
+
+//Adding in battle capability
+//first reusing ogre battle as a base for the battle system
