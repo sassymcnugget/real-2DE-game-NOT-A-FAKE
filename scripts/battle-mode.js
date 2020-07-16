@@ -37,7 +37,7 @@ let enemies =
         {
             return Math.floor(Math.random() * (2 - 1) +1);
         },
-        // encounterRate: 15%,
+        encounterChance: 4,
         battleGreeting: ["WHY ARE YOU IN MY SWAMP", "GET OUTTA MY SWAMP", "AAAAAAAAAAAAA"],
         winText: "STAY. AWAY.",
         loseText: "oooooogh",
@@ -60,7 +60,7 @@ let enemies =
         {
             return Math.floor(Math.random() * (2 - 1) +1);
         },
-        // encounterRate: 25%,
+        encounterChance: 6,
         battleGreeting: ["H....help me...", "*whines*"],
         winText: "go....now....with mama...",
         loseText: "...",
@@ -85,7 +85,7 @@ let enemies =
         {
             return Math.floor(Math.random() * (2 - 1) +1);
         },
-        // encounterRate: 20%,
+        encounterChance: 5,
         battleGreeting: ["You know, I love the name Isosceles. If I had a kid, I would name him Isosceles. Isosceles Kramer", 
         "Have you ever MET a proctologist? They usually have a very good sense of humor. You meet a proctologist at a party, dont walk away. Plant yourself there because you will hear the funniest stories you've ever heard",
         "Who IS the ass man?", "LOOK AWAY, I'M HIDEOUS"],
@@ -112,7 +112,7 @@ let enemies =
         {
             return Math.floor(Math.random() * (3 - 1) +1);
         },
-        // encounterRate: 5%,
+        encounterChance: 1,
         battleGreeting: ["hee hee hee", "Having fun?", "this is a nice distraction"],
         winText: "farewell",
         loseText: "how.. could you...?",
@@ -137,23 +137,54 @@ let enemies =
         {
             return Math.floor(Math.random() * (3 - 1) +1);
         },
-        // encounterRate: 5%,
+        encounterChance: 2,
         battleGreeting: ["EEEEECK", "Have you heard of Flex Tape? I dunno, have you heard of JESUS?", 
-        ""],
+        "YOU MAKE ME ANGRY PHIL"],
         winText: "WHAT THE FUCK IS A SONIC? *does line of coke*",
         loseText: "And I.....HOLY SHIT. Will always love you! Holy hsit I can't believe you did this to me. Damn how could you do this to me?",
         leaveText: "Jon just walks away"
     }
 
 ]
-// console.log(enemies);
 
+//encounter chance sum totalled here
+let encounterChanceSum = 0
+
+function calculateEncounterSum()
+{
+    for(let i=0; i < enemies.length; i++)
+    {
+        encounterChanceSum += enemies[i].encounterChance;
+    }
+}
+
+//encounter chance addede within start battle
+//doing the math in the function so that it's easier to pull from later if I add more enemies later
 function startBattle()
 {
-    console.log("this battle has started!")
+    console.log("this battle has started!");
+    let currentEnemy = encounterFunction();
+    console.log(currentEnemy);
 }
 
 //battle chance
+//this returns a value to see who is most likely to be battled
+//easier so that I can scale enemies later
+function encounterFunction()
+{
+    let encounterStep = 0;
+    let roll = Math.random() * encounterChanceSum;
+    for(let i=0; i < enemies.length; i++)
+    {
+        if(roll < encounterStep + enemies[i].encounterChance)
+            return enemies[i];
+        else
+            encounterStep += enemies[i].encounterChance;
+    }
+}
+
+calculateEncounterSum();
+console.log(encounterChanceSum);
 
 
 // const gameInfo = 

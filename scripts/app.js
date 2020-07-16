@@ -1,5 +1,6 @@
 console.log("pls bro");
 
+//player character attributes
 let hero = document.createElement("img");
 hero.setAttribute("src", "./images/ness bike.gif");
 hero.setAttribute("id", "heroß");
@@ -56,6 +57,8 @@ function move (x, y)
     battleCheck();
 }
 
+//this contains the movement for the player
+//aka input
 function playerInput(e)
 {
     //taken and modified from:
@@ -81,7 +84,7 @@ function playerInput(e)
 		}
 }
 
-
+//this functions  allows the pages to easily change 
 let screens = document.getElementsByClassName("screen");
 
 //Game scene change activation
@@ -101,6 +104,7 @@ function screenChange(screenName)
     }
 }
 
+//function to start the game
 function startGame()
 {
     screenChange("grid-screen");
@@ -108,6 +112,9 @@ function startGame()
     move(0,0);
 }
 
+//this function takes the battleChance within gameState in order to see whether or not a battle will occur
+//purposely left the chance for a battle to occur on the first frame because I thought that'd be funny
+//changed so battleChance is within gameState so that it's easier to change in the future if more levels are added later
 function battleCheck()
 {
     let battleRoll = Math.random();
@@ -117,6 +124,8 @@ function battleCheck()
     }
 }
 
+//this checked whether or not the player has reached the bottom right corner of the board in order to win
+//future-proofed the code so that it's easier to change things or add levels later
 function winCheck()
 {
     if(gameState.playerPositionX == gameState.winPosition.x &&
@@ -126,10 +135,10 @@ function winCheck()
     }
 }
 
+//second part of win check. after checking that the player has landed on the bottom right corner they're brought to 
+//the end screen
 function winState()
 {
     screenChange("end-screen");
 }
 
-//Adding in battle capability
-//first reusing ogre battle as a base for the battle system
