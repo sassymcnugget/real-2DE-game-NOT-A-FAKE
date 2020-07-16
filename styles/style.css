@@ -11,6 +11,12 @@ body
   padding: 10px;
   width: 1020px;
   margin: auto;
+  font-size: small;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
+  text-align: center;
+  background-color: rgb(250, 225, 192);
+  padding: 10%;
 }
 
 .grid-container 
@@ -75,7 +81,9 @@ body
 
 #start-screen
 {
-  background-color: rgb(250, 225, 192);
+  /* background-color: rgb(250, 225, 192);
+  padding: 10%; */
+
 }
 
 #grid-screen

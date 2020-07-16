@@ -1,6 +1,7 @@
 console.log("pls battle me bro");
 
 let battleScreen = document.querySelector("#battle-screen");
+let battleImage = document.querySelector("#battle-image");
 
 const player = 
 {
@@ -22,7 +23,7 @@ let enemies =
         name: "Shrek",
         type: "Ogre",
         battleStyle: "appears from the mud",
-        battleImage: "./images/placeholder500.jpeg",
+        battleImage: "./images/shrekk.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 15,
         attack: () =>
@@ -74,7 +75,7 @@ let enemies =
         name: "Cosmo Kramer",
         type: "Neighbor",
         battleStyle: "& cohort approach",
-        battleImage: "./images/nina doing a THING.gif",
+        battleImage: "./images/Cosmo.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 12,
         attack: () =>
@@ -103,7 +104,7 @@ let enemies =
         name: "Joshua",
         type: "devil",
         battleStyle: "laughs his way into battle",
-        battleImage: "./images/nina doing a THING.gif",
+        battleImage: "./images/devil.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 30,
         attack: () =>
@@ -130,7 +131,7 @@ let enemies =
         name: "Johnothan Tronothan",
         type: "local funny man",
         battleStyle: "comes over to talk to you about boats",
-        battleImage: "./images/nina doing a THING.gif",
+        battleImage: "./images/jonothantronathan.png",
         overworldImage: "./images/placeholder.gif",
         hp: 18,
         attack: () =>
@@ -177,6 +178,7 @@ function startBattle()
     console.log("this battle has started!");
     let currentEnemy = encounterFunction();
     console.log(currentEnemy);
+    battleImage.setAttribute("src", currentEnemy.battleImage);
 }
 
 //battle chance
