@@ -15,7 +15,8 @@ let gameState =
     {
         x: 4,
         y: 4
-    }
+    },
+    battleChance: .33
 }
 
 //Collect all grid items as an array
@@ -109,8 +110,8 @@ function startGame()
 
 function battleCheck()
 {
-    let battleRoll = Math.round(Math.random() * 8);
-    if (battleRoll <= 2)
+    let battleRoll = Math.random();
+    if (battleRoll <= gameState.battleChance)
     {
         startBattle();
     }
