@@ -17,7 +17,8 @@ let gameState =
         x: 4,
         y: 4
     },
-    battleChance: .33
+    battleChance: .33,
+    isBattling: false
 }
 
 //Collect all grid items as an array
@@ -46,6 +47,7 @@ function createGrid()
 //the given perimeter 
 function move (x, y)
 {
+    if(gameState.isBattling == true) return;
     if (x < 0) x = 0;
     if (x > 4) x = 4;
     if (y < 0) y = 0;
@@ -98,11 +100,11 @@ function screenChange(screenName)
     {
         if(screens[i].id == screenName)
         {
-            screens[i].classList.remove("hidden");
+            showElement(screens[i]);
         } 
         else
         {
-            screens[i].classList.add("hidden");
+            hideElement(screens[i]);
         }
     }
 }
@@ -159,14 +161,14 @@ function reset()
 
 let messageBox = document.querySelector("#message-box");
 
-function showMessageBox()
+function showElement(element)
 {
-    messageBox.classList.remove("hidden")
+    element.classList.remove("hidden")
 }
 
-function hideMessageBox()
+function hideElement(element)
 {
-    messageBox.classList.add("hidden");
+    element.classList.add("hidden");
 }
 
 function setMessage(message)

@@ -189,13 +189,14 @@ function calculateEncounterSum()
 //doing the math in the function so that it's easier to pull from later if I add more enemies later
 async function startBattle()
 {
+    gameState.isBattling = true;
     battleScreen.classList.remove("hidden");
     console.log("this battle has started!");
     let currentEnemy = encounterFunction();
     console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
     battleImage.setAttribute("src", currentEnemy.battleImage);
     
-    showMessageBox();
+    showElement(messageBox);
     setMessage(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
 
     await sleep(2000);
@@ -234,6 +235,8 @@ const gameInfo =
 
 async function battle()
 {
+    if("name" in gameInfo.loser) return;
+
     let currentEnemy = gameInfo.currentEnemy;
 
     let battleMessage = battleTurn(player, currentEnemy) +  "  |  " + battleTurn(currentEnemy, player);
@@ -241,7 +244,8 @@ async function battle()
     console.log(battleMessage);
     setMessage(battleMessage);
 
-    if('name' in gameInfo.loser){
+    if('name' in gameInfo.loser)
+    {
         await sleep(2000);
         endBattle();
     }
@@ -284,5 +288,8 @@ async function endBattle()
         currentEnemy.hp = currentEnemy.defaultHp;
         screenChange("death-screen");
     }
-    hideMessageBox();
+    hideElement(messageBox);
+    hideElement(battleScreen);
+    gameInfo.loser = {};
+    gameState.isBattling = false;
 }
