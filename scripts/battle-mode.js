@@ -198,13 +198,12 @@ async function startBattle()
     showMessageBox();
     setMessage(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
 
-    await sleep(1000);
+    await sleep(2000);
 
     console.log(currentEnemy.battleGreeting[0]);
     setMessage(currentEnemy.battleGreeting[0]);
 
-
-    //battle(currentEnemy);
+    gameInfo.currentEnemy = currentEnemy;
 }
 
 //battle chance
@@ -230,8 +229,22 @@ console.log(encounterChanceSum);
 const gameInfo = 
 {
     loser: {},
-    currentEnemy: {},
-    currentTurn: player.name
+    currentEnemy: {}
+}
+
+async function battle()
+{
+    let currentEnemy = gameInfo.currentEnemy;
+
+    let battleMessage = battleTurn(player, currentEnemy) +  "  |  " + battleTurn(currentEnemy, player);
+
+    console.log(battleMessage);
+    setMessage(battleMessage);
+
+    if('name' in gameInfo.loser){
+        await sleep(2000);
+        endBattle();
+    }
 }
 
 function battleTurn(attacker, defender)
@@ -242,40 +255,24 @@ function battleTurn(attacker, defender)
     let battleMessage = attacker.name+" hit " + defender.name + " for " + attack + "\n" +
         defender.name + "'s hp is " + defender.hp;
 
-    console.log(battleMessage);
-    setMessage(battleMessage);
-
     if(defender.hp <= 0)
     {
         gameInfo.loser = defender;
-        gameInfo.currentTurn = player.name;
     }
-    else 
-    {
-        gameInfo.currentTurn = defender.name;
-    }
+    return battleMessage;
 }
 
-function battle(currentEnemy)
+async function endBattle()
 {
-    
-    while(player.hp > 0 && currentEnemy.hp > 0)
-    {
-        if (gameInfo.currentTurn == player.name)
-        {
-            battleTurn(player, currentEnemy);
-        }
-        else if(gameInfo.currentTurn == currentEnemy.name)
-        {
-            battleTurn(currentEnemy, player);
-        }
-    }
+    let currentEnemy = gameInfo.currentEnemy;
 
     console.log(gameInfo.loser.loseText);
     console.log(gameInfo.loser.leaveText);
 
     setMessage(gameInfo.loser.loseText);
+    await sleep(2000);
     setMessage(gameInfo.loser.leaveText);
+    await sleep(2000);
 
     if (gameInfo.loser === currentEnemy)
     {
