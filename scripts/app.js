@@ -80,7 +80,10 @@ function playerInput(e)
             case 40: //down arrow key
             case 83: //s key
 				move(gameState.playerPositionX, gameState.playerPositionY + 1);
-				break;						
+                break;
+            case 32:
+                pause = false;
+                break;  						
 		}
 }
 
@@ -164,4 +167,14 @@ function showMessageBox()
 function hideMessageBox()
 {
     messageBox.classList.add("hidden");
+}
+
+function setMessage(message)
+{
+    messageBox.firstElementChild.innerHTML = message;
+}
+
+//stolen and edited from https://www.sitepoint.com/delay-sleep-pause-wait/
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

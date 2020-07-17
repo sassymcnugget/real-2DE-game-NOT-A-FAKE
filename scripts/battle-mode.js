@@ -187,7 +187,7 @@ function calculateEncounterSum()
 
 //encounter chance addede within start battle
 //doing the math in the function so that it's easier to pull from later if I add more enemies later
-function startBattle()
+async function startBattle()
 {
     battleScreen.classList.remove("hidden");
     console.log("this battle has started!");
@@ -196,8 +196,15 @@ function startBattle()
     battleImage.setAttribute("src", currentEnemy.battleImage);
     
     showMessageBox();
+    setMessage(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
 
-    battle(currentEnemy);
+    await sleep(1000);
+
+    console.log(currentEnemy.battleGreeting[0]);
+    setMessage(currentEnemy.battleGreeting[0]);
+
+
+    //battle(currentEnemy);
 }
 
 //battle chance
@@ -223,6 +230,7 @@ console.log(encounterChanceSum);
 const gameInfo = 
 {
     loser: {},
+    currentEnemy: {},
     currentTurn: player.name
 }
 
@@ -230,8 +238,13 @@ function battleTurn(attacker, defender)
 {
     let attack = attacker.attack();
     defender.hp -= Math.max(attack - defender.defense, 0);
-    console.log(attacker.name+" hit " + defender.name + " for " + attack);
-    console.log(defender.name + "'s hp is " + defender.hp);
+    
+    let battleMessage = attacker.name+" hit " + defender.name + " for " + attack + "\n" +
+        defender.name + "'s hp is " + defender.hp;
+
+    console.log(battleMessage);
+    setMessage(battleMessage);
+
     if(defender.hp <= 0)
     {
         gameInfo.loser = defender;
@@ -245,7 +258,7 @@ function battleTurn(attacker, defender)
 
 function battle(currentEnemy)
 {
-    console.log(currentEnemy.battleGreeting[0]);
+    
     while(player.hp > 0 && currentEnemy.hp > 0)
     {
         if (gameInfo.currentTurn == player.name)
@@ -257,8 +270,12 @@ function battle(currentEnemy)
             battleTurn(currentEnemy, player);
         }
     }
+
     console.log(gameInfo.loser.loseText);
     console.log(gameInfo.loser.leaveText);
+
+    setMessage(gameInfo.loser.loseText);
+    setMessage(gameInfo.loser.leaveText);
 
     if (gameInfo.loser === currentEnemy)
     {
@@ -270,5 +287,5 @@ function battle(currentEnemy)
         currentEnemy.hp = currentEnemy.defaultHp;
         screenChange("death-screen");
     }
-    //hideMessageBox();
+    hideMessageBox();
 }
