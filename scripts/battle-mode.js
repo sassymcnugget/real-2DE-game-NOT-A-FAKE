@@ -6,13 +6,21 @@ let battleImage = document.querySelector("#battle-image");
 const player = 
 {
     name: "heroic lad",
-    attack: 3,
+    attack: () =>
+        {
+        return Math.floor(Math.random() * (4 - 1) + 1);
+        },
     defense: 2,
     //add crit percentage later
     // crit: Math.random(2, 5) + strength,
     hp: 15,
-    magAttack: 3,
-    magDefense: 3
+    magAttack: () =>
+    {
+        return Math.floor(Math.random() * (4 - 1) + 1);
+        },
+    magDefense: 3,
+    leaveText: "Heroic lad scurried away crying to his family",
+    loseText: "OH GEEZ"
 }
 
 
@@ -59,7 +67,10 @@ let enemies =
             return Math.floor(Math.random() * (2 - 1) + 1);
         },
         defense: 0,
-        magAttack: 1,
+        magAttack: () =>
+        {
+            return Math.floor(Math.random() * (2 - 1) + 1);
+        },
         magDefense: 0,
         critRate: () =>
         {
@@ -177,8 +188,9 @@ function startBattle()
     battleScreen.style.display = "block";
     console.log("this battle has started!");
     let currentEnemy = encounterFunction();
-    console.log(currentEnemy);
+    console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
     battleImage.setAttribute("src", currentEnemy.battleImage);
+    battle(currentEnemy);
 }
 
 //battle chance
@@ -201,39 +213,44 @@ calculateEncounterSum();
 console.log(encounterChanceSum);
 
 
-// const gameInfo = 
-// {
-//     winner: " ",
-//     winningMessage: () => 
-//     {
-//         console.log("A WINNER IS " + gameInfo.winner)
-//     },
-//     currentTurn: player.name
-// }
+const gameInfo = 
+{
+    loser: {},
+    currentTurn: player.name
+}
 
-// function battleTurn(attacker, defender)
-// {
-//     let attack = attacker.attack();
-//     defender.hp -= attack;
-//     console.log(attacker.name+" hit " + defender.name + " for " + attack);
-//     console.log(defender.name + "'s hp is " + defender.hp);
-//     if(defender.hp <= 0)
-//     {
-//         gameInfo.winner = attacker.name;
-//     }
-//     gameInfo.currentTurn = defender.name;
-// }
+function battleTurn(attacker, defender)
+{
+    let attack = attacker.attack();
+    defender.hp -= attack;
+    console.log(attacker.name+" hit " + defender.name + " for " + attack);
+    console.log(defender.name + "'s hp is " + defender.hp);
+    if(defender.hp <= 0)
+    {
+        gameInfo.loser = defender;
+        gameInfo.currentTurn = player.name;
+    }
+    else 
+    {
+        gameInfo.currentTurn = defender.name;
+    }
+}
 
-// console.log("WILD " + enemies[0[0]] + " WANTS TO BATTLE")
-// while(player.hp > 0 && enemies[0[2]] > 0)
-// {
-//     if (gameInfo.currentTurn == player.name)
-//     {
-//         battleTurn(player, ogre);
-//     }
-//     else if(gameInfo.currentTurn == ogre.name)
-//     {
-//         battleTurn(ogre, player);
-//     }
-// }
-// gameInfo.winningMessage();
+function battle(currentEnemy)
+{
+    console.log(currentEnemy.battleGreeting[0]);
+    while(player.hp > 0 && currentEnemy.hp > 0)
+    {
+        console.log("while HIT");
+        if (gameInfo.currentTurn == player.name)
+        {
+            battleTurn(player, currentEnemy);
+        }
+        else if(gameInfo.currentTurn == currentEnemy.name)
+        {
+            battleTurn(currentEnemy, player);
+        }
+    }
+    console.log(gameInfo.loser.loseText);
+    console.log(gameInfo.loser.leaveText);
+}
