@@ -33,6 +33,7 @@ let enemies =
         type: "Ogre",
         battleStyle: "appears from the mud",
         battleImage: "./images/shrekk.gif",
+        battleHurtImage: "./images/shrekk hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 15,
         defaultHp: 15,
@@ -62,6 +63,7 @@ let enemies =
         type: "Chimera",
         battleStyle: "wanders up to you",
         battleImage: "./images/nina doing a THING.gif",
+        battleHurtImage: "./images/nina hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 5,
         defaultHp: 5,
@@ -90,6 +92,7 @@ let enemies =
         type: "Neighbor",
         battleStyle: "& cohort approach",
         battleImage: "./images/Cosmo.gif",
+        battleHurtImage: "./images/Cosmo hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 12,
         defaultHp: 12,
@@ -120,6 +123,7 @@ let enemies =
         type: "devil",
         battleStyle: "laughs his way into battle",
         battleImage: "./images/devil.gif",
+        battleHurtImage: "./images/devil hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 30,
         defaultHp: 30,
@@ -148,6 +152,7 @@ let enemies =
         type: "local funny man",
         battleStyle: "comes over to talk to you about boats",
         battleImage: "./images/jonothantronathan.png",
+        battleHurtImage: "./images/nina hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 18,
         attack: () =>
@@ -164,7 +169,7 @@ let enemies =
         {
             return Math.round(Math.random() * (3 - 1) +1);
         },
-        encounterChance: 2,
+        encounterChance: 3,
         battleGreeting: ["EEEEECK", "Have you heard of Flex Tape? I dunno, have you heard of JESUS?", 
         "YOU MAKE ME ANGRY PHIL"],
         winText: "WHAT THE FUCK IS A SONIC? *does line of coke*",
@@ -249,6 +254,10 @@ async function battle()
         await sleep(2000);
         endBattle();
     }
+    if(currentEnemy.hp < currentEnemy.defaultHp/3)
+    {
+        battleImage.setAttribute("src", currentEnemy.battleHurtImage);
+    }
 }
 
 function battleTurn(attacker, defender)
@@ -291,5 +300,15 @@ async function endBattle()
     hideElement(messageBox);
     hideElement(battleScreen);
     gameInfo.loser = {};
+    gameState.isBattling = false;
+}
+
+async function runAway()
+{
+    console.log("hero successfully ran away");
+    setMessage("Hero successfully ran away");
+    await sleep(2000);
+    hideElement(messageBox);
+    hideElement(battleScreen);
     gameState.isBattling = false;
 }
