@@ -44,14 +44,14 @@ let enemies =
         defense: 1,
         magAttack: () =>
         {
-            return Math.round(Math.random() * (2 - 1) + 1);
+            return Math.round(Math.random() * (1 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
             return Math.round(Math.random() * (2 - 1) +1);
         },
-        encounterChance: 4,
+        encounterChance: 30,
         battleGreeting: ["WHY ARE YOU IN MY SWAMP", "GET OUTTA MY SWAMP", "AAAAAAAAAAAAA"],
         winText: "STAY. AWAY.",
         loseText: "DONKEH",
@@ -238,14 +238,38 @@ const gameInfo =
     currentEnemy: {}
 }
 
+function rollCpuAttack()
+{
+    if(Math.random() <= .5)
+    {
+        return "attack";
+    }
+    else
+    {
+        return "magAttack";
+    }
+}
+
 async function battle(attackValue, defenseValue)
 {
     if("name" in gameInfo.loser) return;
 
     let currentEnemy = gameInfo.currentEnemy;
 
-    let battleMessage = battleTurn(player, currentEnemy, attackValue, defenseValue) +  
+    let cpuAttack = rollCpuAttack();
+    let battleMessage;
+    if(cpuAttack == "magAttack")
+    {
+        battleMessage = battleTurn(player, currentEnemy, attackValue, defenseValue) +  
+        "  |  " + battleTurn(currentEnemy, player, currentEnemy.magAttack(), player.magDefense);
+        console.log("magic attack is happening")
+    }
+    else
+    {
+        battleMessage = battleTurn(player, currentEnemy, attackValue, defenseValue) +  
         "  |  " + battleTurn(currentEnemy, player, currentEnemy.attack(), player.defense);
+        console.log("regular attack is happening");
+    }
 
     console.log(battleMessage);
     setMessage(battleMessage);
