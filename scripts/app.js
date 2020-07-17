@@ -148,3 +148,20 @@ function reset()
     player.hp = player.defaultHp;
     screenChange('start-screen');
 }
+
+
+
+
+// MESSAGE BOX STUFF
+
+let messageBox = document.querySelector("#message-box");
+
+function showMessageBox()
+{
+    messageBox.classList.remove("hidden")
+}
+
+function hideMessageBox()
+{
+    messageBox.classList.add("hidden");
+}

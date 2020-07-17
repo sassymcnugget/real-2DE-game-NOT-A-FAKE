@@ -8,7 +8,7 @@ const player =
     name: "heroic lad",
     attack: () =>
         {
-        return Math.floor(Math.random() * (4 - 1) + 1);
+        return Math.round(Math.random() * (4 - 1) + 1);
         },
     defense: 2,
     //add crit percentage later
@@ -17,7 +17,7 @@ const player =
     hp: 15,
     magAttack: () =>
     {
-        return Math.floor(Math.random() * (4 - 1) + 1);
+        return Math.round(Math.random() * (4 - 1) + 1);
         },
     magDefense: 3,
     leaveText: "Heroic lad scurried away crying to his family",
@@ -38,17 +38,17 @@ let enemies =
         defaultHp: 15,
         attack: () =>
         {
-            return Math.floor(Math.random() * (5 - 1) + 1);
+            return Math.round(Math.random() * (5 - 1) + 1);
         },
-        defense: 2,
+        defense: 1,
         magAttack: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) + 1);
+            return Math.round(Math.random() * (2 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) +1);
+            return Math.round(Math.random() * (2 - 1) +1);
         },
         encounterChance: 4,
         battleGreeting: ["WHY ARE YOU IN MY SWAMP", "GET OUTTA MY SWAMP", "AAAAAAAAAAAAA"],
@@ -67,17 +67,17 @@ let enemies =
         defaultHp: 5,
         attack: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) + 1);
+            return Math.round(Math.random() * (2 - 1) + 1);
         },
         defense: 0,
         magAttack: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) + 1);
+            return Math.round(Math.random() * (2 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) +1);
+            return Math.round(Math.random() * (2 - 1) +1);
         },
         encounterChance: 6,
         battleGreeting: ["H....help me...", "*whines*"],
@@ -95,17 +95,17 @@ let enemies =
         defaultHp: 12,
         attack: () =>
         {
-            return Math.floor(Math.random() * (3 - 1) + 1);
+            return Math.round(Math.random() * (3 - 1) + 1);
         },
         defense: 1,
         magAttack: () =>
         {
-            return Math.floor(Math.random() * (3 - 1) + 1);
+            return Math.round(Math.random() * (3 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) +1);
+            return Math.round(Math.random() * (2 - 1) +1);
         },
         encounterChance: 5,
         battleGreeting: ["You know, I love the name Isosceles. If I had a kid, I would name him Isosceles. Isosceles Kramer", 
@@ -125,17 +125,17 @@ let enemies =
         defaultHp: 30,
         attack: () =>
         {
-            return Math.floor(Math.random() * (7 - 1) + 1);
+            return Math.round(Math.random() * (7 - 1) + 1);
         },
-        defense: 4,
+        defense: 2,
         magAttack: () =>
         {
-            return Math.floor(Math.random() * (5 - 1) + 1);
+            return Math.round(Math.random() * (5 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
-            return Math.floor(Math.random() * (3 - 1) +1);
+            return Math.round(Math.random() * (3 - 1) +1);
         },
         encounterChance: 1,
         battleGreeting: ["hee hee hee", "Having fun?", "this is a nice distraction"],
@@ -152,17 +152,17 @@ let enemies =
         hp: 18,
         attack: () =>
         {
-            return Math.floor(Math.random() * (2 - 1) + 1);
+            return Math.round(Math.random() * (2 - 1) + 1);
         },
         defense: 3,
         magAttack: () =>
         {
-            return Math.floor(Math.random() * (4 - 1) + 1);
+            return Math.round(Math.random() * (4 - 1) + 1);
         },
         magDefense: 0,
         critRate: () =>
         {
-            return Math.floor(Math.random() * (3 - 1) +1);
+            return Math.round(Math.random() * (3 - 1) +1);
         },
         encounterChance: 2,
         battleGreeting: ["EEEEECK", "Have you heard of Flex Tape? I dunno, have you heard of JESUS?", 
@@ -194,6 +194,9 @@ function startBattle()
     let currentEnemy = encounterFunction();
     console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
     battleImage.setAttribute("src", currentEnemy.battleImage);
+    
+    showMessageBox();
+
     battle(currentEnemy);
 }
 
@@ -226,7 +229,7 @@ const gameInfo =
 function battleTurn(attacker, defender)
 {
     let attack = attacker.attack();
-    defender.hp -= attack;
+    defender.hp -= Math.max(attack - defender.defense, 0);
     console.log(attacker.name+" hit " + defender.name + " for " + attack);
     console.log(defender.name + "'s hp is " + defender.hp);
     if(defender.hp <= 0)
@@ -267,4 +270,5 @@ function battle(currentEnemy)
         currentEnemy.hp = currentEnemy.defaultHp;
         screenChange("death-screen");
     }
+    //hideMessageBox();
 }
