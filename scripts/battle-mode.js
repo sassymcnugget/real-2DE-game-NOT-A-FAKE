@@ -54,7 +54,7 @@ let enemies =
         encounterChance: 4,
         battleGreeting: ["WHY ARE YOU IN MY SWAMP", "GET OUTTA MY SWAMP", "AAAAAAAAAAAAA"],
         winText: "STAY. AWAY.",
-        loseText: "oooooogh",
+        loseText: "DONKEH",
         leaveText: "Shrek waded back into the swamp"
     },
 
@@ -197,19 +197,19 @@ async function startBattle()
     gameState.isBattling = true;
     battleScreen.classList.remove("hidden");
     console.log("this battle has started!");
+
     let currentEnemy = encounterFunction();
-    console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
-    battleImage.setAttribute("src", currentEnemy.battleImage);
+    gameInfo.currentEnemy = currentEnemy;
     
+    battleImage.setAttribute("src", currentEnemy.battleImage);
     showElement(messageBox);
     setMessage(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
+    console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
 
     await sleep(2000);
 
     console.log(currentEnemy.battleGreeting[0]);
     setMessage(currentEnemy.battleGreeting[0]);
-
-    gameInfo.currentEnemy = currentEnemy;
 }
 
 //battle chance
@@ -238,13 +238,14 @@ const gameInfo =
     currentEnemy: {}
 }
 
-async function battle()
+async function battle(attackValue, defenseValue)
 {
     if("name" in gameInfo.loser) return;
 
     let currentEnemy = gameInfo.currentEnemy;
 
-    let battleMessage = battleTurn(player, currentEnemy) +  "  |  " + battleTurn(currentEnemy, player);
+    let battleMessage = battleTurn(player, currentEnemy, attackValue, defenseValue) +  
+        "  |  " + battleTurn(currentEnemy, player, currentEnemy.attack(), player.defense);
 
     console.log(battleMessage);
     setMessage(battleMessage);
@@ -254,18 +255,17 @@ async function battle()
         await sleep(2000);
         endBattle();
     }
-    if(currentEnemy.hp < currentEnemy.defaultHp/3)
+    if(currentEnemy.hp <= currentEnemy.defaultHp/3)
     {
         battleImage.setAttribute("src", currentEnemy.battleHurtImage);
     }
 }
 
-function battleTurn(attacker, defender)
+function battleTurn(attacker, defender, attackAmount, defenseAmount)
 {
-    let attack = attacker.attack();
-    defender.hp -= Math.max(attack - defender.defense, 0);
+    defender.hp -= Math.max(attackAmount - defenseAmount, 0);
     
-    let battleMessage = attacker.name+" hit " + defender.name + " for " + attack + "\n" +
+    let battleMessage = attacker.name+" hit " + defender.name + " for " + attackAmount + "\n" +
         defender.name + "'s hp is " + defender.hp;
 
     if(defender.hp <= 0)
