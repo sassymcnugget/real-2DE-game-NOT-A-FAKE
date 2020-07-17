@@ -13,6 +13,7 @@ const player =
     defense: 2,
     //add crit percentage later
     // crit: Math.random(2, 5) + strength,
+    defaultHp: 15,
     hp: 15,
     magAttack: () =>
     {
@@ -34,6 +35,7 @@ let enemies =
         battleImage: "./images/shrekk.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 15,
+        defaultHp: 15,
         attack: () =>
         {
             return Math.floor(Math.random() * (5 - 1) + 1);
@@ -62,6 +64,7 @@ let enemies =
         battleImage: "./images/nina doing a THING.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 5,
+        defaultHp: 5,
         attack: () =>
         {
             return Math.floor(Math.random() * (2 - 1) + 1);
@@ -89,6 +92,7 @@ let enemies =
         battleImage: "./images/Cosmo.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 12,
+        defaultHp: 12,
         attack: () =>
         {
             return Math.floor(Math.random() * (3 - 1) + 1);
@@ -118,6 +122,7 @@ let enemies =
         battleImage: "./images/devil.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 30,
+        defaultHp: 30,
         attack: () =>
         {
             return Math.floor(Math.random() * (7 - 1) + 1);
@@ -185,7 +190,6 @@ function calculateEncounterSum()
 function startBattle()
 {
     battleScreen.classList.remove("hidden");
-    battleScreen.style.display = "block";
     console.log("this battle has started!");
     let currentEnemy = encounterFunction();
     console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
@@ -241,7 +245,6 @@ function battle(currentEnemy)
     console.log(currentEnemy.battleGreeting[0]);
     while(player.hp > 0 && currentEnemy.hp > 0)
     {
-        console.log("while HIT");
         if (gameInfo.currentTurn == player.name)
         {
             battleTurn(player, currentEnemy);
@@ -253,4 +256,15 @@ function battle(currentEnemy)
     }
     console.log(gameInfo.loser.loseText);
     console.log(gameInfo.loser.leaveText);
+
+    if (gameInfo.loser === currentEnemy)
+    {
+        player.hp = player.defaultHp;
+        currentEnemy.hp = currentEnemy.defaultHp;
+    }
+    else
+    {
+        currentEnemy.hp = currentEnemy.defaultHp;
+        screenChange("death-screen");
+    }
 }

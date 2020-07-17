@@ -142,3 +142,9 @@ function winState()
     screenChange("end-screen");
 }
 
+//reset
+function reset()
+{
+    player.hp = player.defaultHp;
+    screenChange('start-screen');
+}
