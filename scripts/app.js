@@ -56,8 +56,7 @@ function move (x, y)
     gridSystem[y][x].append(hero);
     gameState.playerPositionX = x;
     gameState.playerPositionY = y;
-    winCheck();
-    battleCheck();
+    spaceCheck();
 }
 
 //this contains the movement for the player
@@ -132,12 +131,16 @@ function battleCheck()
 
 //this checked whether or not the player has reached the bottom right corner of the board in order to win
 //future-proofed the code so that it's easier to change things or add levels later
-function winCheck()
+function spaceCheck()
 {
     if(gameState.playerPositionX == gameState.winPosition.x &&
         gameState.playerPositionY == gameState.winPosition.y)
     {
         winState();
+    }
+    else
+    {
+        battleCheck();
     }
 }
 
