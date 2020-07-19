@@ -51,7 +51,7 @@ let enemies =
         {
             return Math.round(Math.random() * (2 - 1) +1);
         },
-        encounterChance: 30,
+        encounterChance: 4,
         battleGreeting: ["WHY ARE YOU IN MY SWAMP", "GET OUTTA MY SWAMP", "AAAAAAAAAAAAA"],
         winText: "STAY. AWAY.",
         loseText: "DONKEH",
@@ -315,6 +315,8 @@ async function endBattle()
     {
         player.hp = player.defaultHp;
         currentEnemy.hp = currentEnemy.defaultHp;
+        gameState.winCount++;
+        console.log(gameState.winCount);
     }
     else
     {

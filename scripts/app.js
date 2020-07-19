@@ -18,7 +18,8 @@ let gameState =
         y: 4
     },
     battleChance: .33,
-    isBattling: false
+    isBattling: false,
+    winCount: 0
 }
 
 //Collect all grid items as an array
@@ -144,7 +145,14 @@ function winCheck()
 //the end screen
 function winState()
 {
-    screenChange("end-screen");
+    if (gameState.winCount >= 1)
+    {
+        screenChange("end-screen");
+    }
+    else
+    {
+        screenChange("pacifist-end-screen");
+    }
 }
 
 //reset
@@ -152,6 +160,7 @@ function reset()
 {
     player.hp = player.defaultHp;
     screenChange('start-screen');
+    gameInfo.winCount = 0;
 }
 
 
