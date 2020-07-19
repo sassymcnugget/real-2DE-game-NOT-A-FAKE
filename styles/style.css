@@ -1,3 +1,7 @@
+:root {
+  --gridSquareSize : 150px;
+}
+
 body 
 {
   background-color: #2b242e;
@@ -21,11 +25,15 @@ body
 .grid-container 
 {
   display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 200px 200px 200px 200px 200px;
-  grid-template-rows: 200px 200px 200px 200px 200px;
+  grid-gap: 0%;
+  grid-template-columns: var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize);
+  grid-template-rows: var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize) var(--gridSquareSize);
   background-image: url("../images/moonside.jpg");
   background-size: 100%;
+  position: fixed;
+  left: 50%;
+  transform: 
+    translate(-50%, 0%);
 }
 
 .grid-item 
@@ -65,9 +73,12 @@ body
 /* Modal Content/Box */
 .modal-content 
 {
-  margin: 15% 14%; 
-  padding: 20px;
-  border: 1px solid #888;
+  position: fixed;
+  transform:
+    translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 77.7%;
 }
 
 
