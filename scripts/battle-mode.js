@@ -200,6 +200,7 @@ async function startBattle()
 
     let currentEnemy = encounterFunction();
     gameInfo.currentEnemy = currentEnemy;
+    document.querySelector("#enemy-hp").innerHTML = currentEnemy.hp;
     
     battleImage.setAttribute("src", currentEnemy.battleImage);
     showElement(messageBox);
@@ -261,8 +262,8 @@ async function battle(attackValue, defenseValue)
     if(cpuAttack == "magAttack")
     {
         battleMessage = battleTurn(player, currentEnemy, attackValue, defenseValue) +  
-        "  |  " + battleTurn(currentEnemy, player, currentEnemy.magAttack(), player.magDefense);
-        console.log("magic attack is happening")
+        "  |  (magic damage)" + battleTurn(currentEnemy, player, currentEnemy.magAttack(), player.magDefense);
+        console.log("magic attack is happening");
     }
     else
     {
@@ -270,7 +271,8 @@ async function battle(attackValue, defenseValue)
         "  |  " + battleTurn(currentEnemy, player, currentEnemy.attack(), player.defense);
         console.log("regular attack is happening");
     }
-
+    
+    document.querySelector("#enemy-hp").innerHTML = currentEnemy.hp;
     console.log(battleMessage);
     setMessage(battleMessage);
 
@@ -289,8 +291,7 @@ function battleTurn(attacker, defender, attackAmount, defenseAmount)
 {
     defender.hp -= Math.max(attackAmount - defenseAmount, 0);
     
-    let battleMessage = attacker.name+" hit " + defender.name + " for " + attackAmount + "\n" +
-        defender.name + "'s hp is " + defender.hp;
+    let battleMessage = attacker.name+" hit " + defender.name + " for " + attackAmount;
 
     if(defender.hp <= 0)
     {
