@@ -94,7 +94,11 @@
   </div>
 
   <div id="death-screen" class="screen hidden">
-    DEATH SCREEN
+    <h1>DEATH</h1>
+    <article>
+      Dang, better luck next time kiddo. Maybe the ol' git gud would be applicable here, hmm? Either wait,
+      please try again hombre.
+    </article>
     <button onclick="reset()">pls try again</button>
   </div>
 
@@ -103,9 +107,11 @@
       Player HP: <span id="player-hp"> 69</span>
     </div>
     <div id="message-box">pls write in me</div>
-    <button class="battle-button" id="battle-fight" onclick="battle(player.attack(), gameInfo.currentEnemy.defense)">FIGHT</button>
-    <button class="battle-button" id="battle-fight" onclick="battle(player.magAttack(), gameInfo.currentEnemy.magDefense)">MAGIC</button>
-    <button class="battle-button" onclick="runAway()" id="battle-run">RUN</button>
+      <div id="battle-button-container">
+        <button class="battle-button" id="battle-fight" onclick="battle(player.attack(), gameInfo.currentEnemy.defense)">FIGHT</button>
+        <button class="battle-button" id="battle-fight" onclick="battle(player.magAttack(), gameInfo.currentEnemy.magDefense)">MAGIC</button>
+        <button class="battle-button" onclick="runAway()" id="battle-run">RUN</button>
+      </div>
   </div>
 
 
