@@ -157,6 +157,7 @@ let enemies =
         battleHurtImage: "./images/nina hurt.gif",
         overworldImage: "./images/placeholder.gif",
         hp: 18,
+        defaultHp: 18,
         attack: () =>
         {
             return Math.round(Math.random() * (2 - 1) + 1);
@@ -339,6 +340,7 @@ async function endBattle()
     {
         currentEnemy.hp = currentEnemy.defaultHp;
         screenChange("death-screen");
+        gameInfo.winCount = 0;
     }
     hideElement(messageBoxContainer);
     hideElement(battleScreen);
