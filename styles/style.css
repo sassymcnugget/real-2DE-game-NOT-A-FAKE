@@ -10,8 +10,9 @@
 
 body 
 {
-  background-color: #2b242e;
+  background-color: black;
   font-family: pressStart;
+  text-transform: uppercase;
 }
 
 
@@ -27,6 +28,7 @@ body
   font-weight: lighter;
   text-align: center;
   background-color: rgb(250, 225, 192);
+  border-radius: 25%;;
 }
 
 .grid-container 
@@ -103,6 +105,7 @@ body
   padding: 10%;
   height: 50%;
   width: 40%;
+  background-color: darkviolet;
 }
 
 #info-screen
@@ -110,6 +113,7 @@ body
   padding: 10%;
   height: 50%;
   width: 40%;
+  background-color: darkviolet;
 }
 
 #grid-screen
@@ -137,6 +141,7 @@ body
   min-width: 50%;
   max-width:50%; 
   max-height:40%;
+  background-color: darkviolet;
 }
 
 
@@ -148,12 +153,14 @@ body
   min-width: 50%;
   max-width:50%; 
   max-height:40%;
+  background-color: darkviolet;
+
 }
 
-#message-box {
+#message-box-container {
   position:fixed;
   bottom:0%;
-  background-color: azure;
+  background-color: darkviolet;
   padding: 10px;
   width: 77.7%;
   height: 20%;
@@ -161,6 +168,7 @@ body
   transform: 
     translate(-50%, 0);
   left: 50%;
+opacity: 80%;
 }
 
 #enemy-hp
@@ -168,9 +176,24 @@ body
   
 }
 
-#enemy-hp-container {
+#enemy-hp-container 
+{
   color:white;
   justify-content: right;
   text-align: right;
   padding-right: 12%;
+}
+
+#player-hp
+{
+  justify-content: center;
+  margin-top: 2%;
+}
+
+#player-hp-container
+{
+  text-align: center;
+  margin: 1%;
+  font-size: x-large;
+  color: white;
 }

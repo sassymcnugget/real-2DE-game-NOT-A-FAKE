@@ -170,7 +170,7 @@ function reset()
 
 
 // MESSAGE BOX STUFF
-
+let messageBoxContainer = document.querySelector("#message-box-container");
 let messageBox = document.querySelector("#message-box");
 
 function showElement(element)
@@ -185,7 +185,7 @@ function hideElement(element)
 
 function setMessage(message)
 {
-    messageBox.firstElementChild.innerHTML = message;
+    messageBox.innerHTML = message;
 }
 
 //stolen and edited from https://www.sitepoint.com/delay-sleep-pause-wait/

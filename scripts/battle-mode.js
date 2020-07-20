@@ -11,8 +11,10 @@ const player =
         return Math.round(Math.random() * (4 - 1) + 1);
         },
     defense: 2,
-    //add crit percentage later
-    // crit: Math.random(2, 5) + strength,
+    critDamage: () =>
+        {
+            return Math.round(Math.random() * (4 - 1) +1);
+        },
     defaultHp: 15,
     hp: 15,
     magAttack: () =>
@@ -47,7 +49,7 @@ let enemies =
             return Math.round(Math.random() * (1 - 1) + 1);
         },
         magDefense: 0,
-        critRate: () =>
+        critDamage: () =>
         {
             return Math.round(Math.random() * (2 - 1) +1);
         },
@@ -77,7 +79,7 @@ let enemies =
             return Math.round(Math.random() * (2 - 1) + 1);
         },
         magDefense: 0,
-        critRate: () =>
+        critDamage: () =>
         {
             return Math.round(Math.random() * (2 - 1) +1);
         },
@@ -106,7 +108,7 @@ let enemies =
             return Math.round(Math.random() * (3 - 1) + 1);
         },
         magDefense: 0,
-        critRate: () =>
+        critDamage: () =>
         {
             return Math.round(Math.random() * (2 - 1) +1);
         },
@@ -137,7 +139,7 @@ let enemies =
             return Math.round(Math.random() * (5 - 1) + 1);
         },
         magDefense: 0,
-        critRate: () =>
+        critDamage: () =>
         {
             return Math.round(Math.random() * (3 - 1) +1);
         },
@@ -165,7 +167,7 @@ let enemies =
             return Math.round(Math.random() * (4 - 1) + 1);
         },
         magDefense: 0,
-        critRate: () =>
+        critDamage: () =>
         {
             return Math.round(Math.random() * (3 - 1) +1);
         },
@@ -190,6 +192,11 @@ function calculateEncounterSum()
     }
 }
 
+function randomElementInArray(array)
+{
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 //encounter chance addede within start battle
 //doing the math in the function so that it's easier to pull from later if I add more enemies later
 async function startBattle()
@@ -201,16 +208,17 @@ async function startBattle()
     let currentEnemy = encounterFunction();
     gameInfo.currentEnemy = currentEnemy;
     document.querySelector("#enemy-hp").innerHTML = currentEnemy.hp;
+    document.querySelector("#player-hp").innerHTML = player.hp;
     
     battleImage.setAttribute("src", currentEnemy.battleImage);
-    showElement(messageBox);
+    showElement(messageBoxContainer);
     setMessage(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
     console.log(currentEnemy.type + " " + currentEnemy.name + " " + currentEnemy.battleStyle);
 
     await sleep(2000);
 
-    console.log(currentEnemy.battleGreeting[0]);
-    setMessage(currentEnemy.battleGreeting[0]);
+    console.log(randomElementInArray(currentEnemy.battleGreeting));
+    setMessage(randomElementInArray(currentEnemy.battleGreeting));
 }
 
 //battle chance
@@ -273,6 +281,7 @@ async function battle(attackValue, defenseValue)
     }
     
     document.querySelector("#enemy-hp").innerHTML = currentEnemy.hp;
+    document.querySelector("#player-hp").innerHTML = player.hp;
     console.log(battleMessage);
     setMessage(battleMessage);
 
@@ -292,6 +301,13 @@ function battleTurn(attacker, defender, attackAmount, defenseAmount)
     defender.hp -= Math.max(attackAmount - defenseAmount, 0);
     
     let battleMessage = attacker.name+" hit " + defender.name + " for " + attackAmount;
+    let critDamage = attacker.critDamage();
+    let critRate = .3;
+    if(Math.random() < critRate)
+    {
+        battleMessage += "\nWith additional critical damage of " + critDamage;
+        defender.hp -= critDamage;
+    }
 
     if(defender.hp <= 0)
     {
@@ -324,7 +340,7 @@ async function endBattle()
         currentEnemy.hp = currentEnemy.defaultHp;
         screenChange("death-screen");
     }
-    hideElement(messageBox);
+    hideElement(messageBoxContainer);
     hideElement(battleScreen);
     gameInfo.loser = {};
     gameState.isBattling = false;
@@ -335,7 +351,7 @@ async function runAway()
     console.log("hero successfully ran away");
     setMessage("Hero successfully ran away");
     await sleep(2000);
-    hideElement(messageBox);
+    hideElement(messageBoxContainer);
     hideElement(battleScreen);
     gameState.isBattling = false;
 }
